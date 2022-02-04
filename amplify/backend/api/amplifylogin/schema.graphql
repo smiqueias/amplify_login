@@ -1,0 +1,6 @@
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  email: AWSEmail
+  username: String!
+  amount: Float!
+}
