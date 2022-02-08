@@ -20,12 +20,10 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  final _isAmplifyConfigured = ValueNotifier<bool>(false);
 
   @override
   void initState() {
     super.initState();
-    //_configureAmplify();
   }
 
   @override
@@ -40,32 +38,5 @@ class _AppState extends State<App> {
           '/auth': (context) => const AuthPage(),
         },
       );
-
   }
-
-  Future<void> _configureAmplify() async {
-    try {
-      await Amplify.addPlugins([
-        AmplifyAuthCognito(),
-        AmplifyDataStore(modelProvider: ModelProvider.instance),
-        AmplifyAPI()
-      ]);
-      // Certifica que o app não abra até que o amplify esteja configurado
-      await Amplify.configure(amplifyconfig);
-      _isAmplifyConfigured.value = true;
-    } catch (e, st) {
-      print("Erro ao configurar Amplify: $e");
-      print("Stacktrace: $st");
-    }
-  }
-
-  Future<void> login() async {
-    try {
-      await Amplify.Auth.signIn(username: 'saumiq@outlook.com', password: 'teste@123');
-    } catch (e, st) {
-      print("Erro ao fazer login: $e");
-      print("Stacktrace: $st");
-    }
-  }
-
 }
